@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="3600">
+  <Properties>
+    <property name="patternLayout">%-5p - %d{yyyy-MM-dd HH:mm:ss} %c [%t] %l -- %m%n</property>
+  </Properties>
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${patternLayout}"/>
+    </Console>
+    <RollingRandomAccessFile name="RollingFile" fileName="/export/Logs/demo-websocket.log"
+                             filePattern="/export/Logs/demo-websocket-%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout charset="UTF-8" pattern="${patternLayout}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+        <SizeBasedTriggeringPolicy size="1024 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="5">
+      </DefaultRolloverStrategy>
+    </RollingRandomAccessFile>
+    <Async name="Async">
+      <AppenderRef ref="RollingFile"/>
+      <AppenderRef ref="Console"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Root includeLocation="true" level="info">
+      <AppenderRef ref="Async"/>
+    </Root>
+  </Loggers>
+</Configuration>

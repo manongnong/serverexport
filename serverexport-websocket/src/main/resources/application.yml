@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /serverexport-websocket
+  # https start
+#  ssl:
+#    # 证书路径
+#    key-store: classpath:server.keystore
+#    key-alias: tomcat
+#    enabled: true
+#    key-store-type: JKS
+#    #与申请时输入一致
+#    key-store-password: 123456
+#    # 浏览器默认端口 和 80 类似
+#  port: 443
+  # https end
+  port: 8081
+logging:
+  config:log4j2.xml
+
+
+spring:
+  jpa:
+    database: h2
+    show-sql: true   #打印sql
+  datasource:
+#    url: jdbc:h2:./db/serverexport
+    url: jdbc:h2:tcp://localhost/./db/serverexport
+    driver-class-name: org.h2.Driver
+    username: test
+    password: test
